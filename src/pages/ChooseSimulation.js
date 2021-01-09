@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {withRouter} from "react-router";
 import styled from 'styled-components';
 import SimulationsTable from "../components/tables/ChooseSimulationsTable/SimulationsTable";
 import {simulationsData} from "../utils/helpers";
 import {Paper} from "@material-ui/core";
+import AddButton from "../components/atoms/AddButton";
+import Footer from "../components/molecules/Footer";
+import SimulationPreset from "../components/forms/SimulationPreset";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -19,15 +22,25 @@ const TableWrapper = styled.div`
 `
 
 const ChooseSimulation = () => {
+    const [formOpen, setFormOpen] = useState(false);
+
+
     return(
         <>
+            <AddButton onClick={() => setFormOpen(!formOpen)} open={formOpen}/>
             <StyledContainer>
-                <TableWrapper>
-                    <Paper elevation={5}>
-                        <SimulationsTable data={simulationsData}/>
+                {!formOpen ?
+                    <TableWrapper>
+                        <Paper elevation={10}>
+                            <SimulationsTable data={simulationsData}/>
+                        </Paper>
+                    </TableWrapper> :
+                    <Paper elevation={10}>
+                        <SimulationPreset/>
                     </Paper>
-                </TableWrapper>
+                }
             </StyledContainer>
+            <Footer/>
         </>
     );
 };
