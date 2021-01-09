@@ -16,7 +16,7 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   text-align: center;
   &:hover {
-    background-color: #0099ff;
+    background-color: #62C370;
     color: #fff;
     border-radius: 5px;
     padding: 1px;
@@ -63,49 +63,49 @@ const SimulationsTable = ({data}) => {
     const columns = React.useMemo(
         () => [
             {
-                Header: 'Ustawienia symulacji',
+                Header: 'Simulations presets',
                 columns: [
                     {
-                        Header: 'Nazwa symulacji',
+                        Header: 'Simulation name',
                         accessor: 'simulationName'
                     },
                     {
-                        Header: 'Populacja',
+                        Header: 'Population',
                         accessor: 'population'
                     },
                     {
-                        Header: 'Początkowa liczba zakażonych',
+                        Header: 'Initial number of infected',
                         accessor: 'initialNumberOfInfected'
                     },
                     {
-                        Header: 'Wskaźnik R',
+                        Header: 'Infection rate',
                         accessor: 'infectionRate'
                     },
                     {
-                        Header: 'Wskaźnik umieralności',
+                        Header: 'Mortality rate',
                         accessor: 'mortalityRate'
                     },
                     {
-                      Header: 'Czas leczenia',
+                      Header: 'Cure time',
                       accessor: 'cureTime'
                     },
                     {
-                        Header: 'Czas umierania',
+                        Header: 'Mortal time',
                         accessor: 'mortalTime'
                     },
                     {
-                      Header: 'Czas symulacji',
+                      Header: 'Simulation time',
                       accessor: 'simulationTime'
                     },
                     {
-                        Header: 'Wybierz',
+                        Header: 'Select preset',
                         accessor: '_id',
                         Cell: ({row: {values}}) => (
                             <StyledLinkWrapper>
                                 <StyledLink
                                     onClick={() => console.log('link works')}
                                     to={'#'}>
-                                    Przejdź
+                                    simulate
                                 </StyledLink>
                             </StyledLinkWrapper>
                         )

@@ -34,7 +34,7 @@ const Footer = () => {
         <StyledFooter>
             <StyledFooterText>
                 <StyledHref href={'https://github.com/dawidplesniarski'}>
-                    App developed by Dawid Pleśniarski 2020 &copy;
+                    App developed by Dawid Pleśniarski 2021 &copy; for Treative
                 </StyledHref>
             </StyledFooterText>
         </StyledFooter>

@@ -2,6 +2,9 @@ import React, {useState} from "react";
 import {SimulationPresetWrapper, StyledFormTitle, StyledContentWrapper} from "./SimulationPreset.styles";
 import TextInput from "../atoms/TextInput/TextInput";
 import Button from "../atoms/Button/Button";
+import AlertComponent from "../Alert/Alert";
+import axios from "axios";
+import {API_URL} from "../../utils/helpers";
 
 
 const SimulationPreset = () => {
@@ -13,10 +16,28 @@ const SimulationPreset = () => {
     const [cureTime, setCureTime] = useState(null);
     const [mortalTime, setMortalTime] = useState(null);
     const [simulationTime, setSimulationTime] = useState(null);
+    const [alertVisible, setAlertVisible] = useState(false);
+
+    const addNewPreset = () => {
+        axios.post(`${API_URL}/simulation/addSimulation`,{
+            simulationName: simulationName,
+            population: population,
+            initialNumberOfInfected: initialNumberOfInfected,
+            infectionRate: infectionRate,
+            mortalityRate: mortalityRate,
+            cureTime: cureTime,
+            mortalTime: mortalTime,
+            simulationTime: simulationTime
+        }).then(res =>
+            setAlertVisible(true)
+        ).catch(err =>
+        console.log(err));
+    }
 
 
     return(
         <>
+            {alertVisible && <AlertComponent type={'success'} message={'Preset added successfully'} onClick={() => setAlertVisible(false)}/>}
             <SimulationPresetWrapper>
                 <StyledContentWrapper>
                     <StyledFormTitle>Add simulation preset</StyledFormTitle>
@@ -28,7 +49,7 @@ const SimulationPreset = () => {
                     <TextInput onChange={e => setCureTime(e.target.value)} type={'text'} name={'Cure Time'} placeholder={'Cure time'}/>
                     <TextInput onChange={e => setMortalTime(e.target.value)} type={'text'} name={'Mortal Time'} placeholder={'Mortal time'}/>
                     <TextInput onChange={e => setSimulationTime(e.target.value)} type={'text'} name={'Mortal Time'} placeholder={'Simulation time'}/>
-                    <Button onClick={() => console.log('ok')} disabled={
+                    <Button onClick={async () => await addNewPreset()} disabled={
                         simulationName === null||
                         population === null ||
                         initialNumberOfInfected === null ||
@@ -37,7 +58,7 @@ const SimulationPreset = () => {
                         cureTime === null ||
                         mortalTime === null ||
                         simulationTime === null}>
-                        Dodaj ustawienia symulacji
+                        Add preset
                     </Button>
                 </StyledContentWrapper>
             </SimulationPresetWrapper>
