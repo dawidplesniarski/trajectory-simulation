@@ -186,4 +186,12 @@ export function generateLabels(data) {
         finalArr.push(`Day ${i}`);
     };
     return finalArr;
+};
+
+export function getInfectionsNumber(data) {
+    let finalArr = [];
+    data.forEach(item => {
+        finalArr.push(item.infectedPeoples);
+    });
+    return finalArr;
 }

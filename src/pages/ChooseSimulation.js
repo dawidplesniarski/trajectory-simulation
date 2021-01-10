@@ -7,6 +7,7 @@ import {Paper} from "@material-ui/core";
 import AddButton from "../components/atoms/AddButton";
 import Footer from "../components/molecules/Footer";
 import SimulationPreset from "../components/forms/SimulationPreset";
+import Banner from '../assets/images/baner.svg';
 import axios from "axios";
 
 const StyledContainer = styled.div`
@@ -14,12 +15,17 @@ const StyledContainer = styled.div`
   align-items: center;
   flex-direction: column;
   margin-bottom: 50px;
-  margin-top: 100px;
+  margin-top: 40px;
 `;
 
 const TableWrapper = styled.div`
   display: flex;
   width: 80%
+`;
+
+const StyledBanner = styled.img`
+  width: 20%;
+  margin-bottom: 30px;
 `;
 
 const ChooseSimulation = () => {
@@ -41,6 +47,7 @@ const ChooseSimulation = () => {
         <>
             <AddButton onClick={() => setFormOpen(!formOpen)} open={formOpen}/>
             <StyledContainer>
+                {!formOpen && <StyledBanner src={Banner} alt={'Undraw Photo'}/>}
                 {!formOpen ?
                     <TableWrapper>
                         {simulationsPresets.length > 0 ?
