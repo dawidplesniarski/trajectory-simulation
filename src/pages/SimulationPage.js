@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import styled from 'styled-components';
 import {withRouter} from "react-router";
 import SimulationDayCell from "../components/tables/SimulationTable/SimulationDayCell";
@@ -11,7 +11,7 @@ const StyledContainer = styled.div`
   align-items: center;
   flex-direction: column;
   margin-bottom: 100px;
-  margin-top: 100px;
+  margin-top: 30px;
 `;
 
 const StyledListContainer = styled.div`
@@ -24,6 +24,28 @@ const StyledListContainer = styled.div`
 const StyledChartContainer = styled.div`
   display: flex;
   width: 50%;
+`;
+
+const StyledPageTitle = styled.p`
+  font-family: Montserrat,serif;
+  font-weight: bold;
+  font-size: 2.1rem;
+`;
+const StyledPageSubtitle = styled.p`
+  font-family: Montserrat,serif;
+  font-weight: bold;
+  font-size: 1.6rem;
+`;
+
+const SummaryContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-family: Montserrat,serif;
+  font-size: 1.3rem;
+  width: 700px;
+  margin-bottom: 30px;
 `;
 
 const data = {
@@ -46,10 +68,26 @@ const data = {
     ]
 };
 
-const SimulationPage = () => {
+const SimulationPage = (props) => {
+    const [simulationTitle, setSimulationTitle] = useState('Simulation');
+
+    useEffect(() => {
+        if(props.location.nameProps) {
+            setSimulationTitle(props.location.nameProps.name);
+        }
+    },[])
+
     return (
         <>
             <StyledContainer>
+                <StyledPageTitle>{simulationTitle}</StyledPageTitle>
+                <StyledPageSubtitle>Summary</StyledPageSubtitle>
+                <SummaryContainer>
+                    <span>Healthy: {simulation[simulation.length - 1].healthyPeoples}</span>
+                    <span>Infected: {simulation[simulation.length - 1].infectedPeoples}</span>
+                    <span>Deaths: {simulation[simulation.length - 1].deadPeoples}</span>
+                    <span>Recovered: {simulation[simulation.length - 1].curedPeoples}</span>
+                </SummaryContainer>
                 <StyledChartContainer>
                     <Line data={data}/>
                 </StyledChartContainer>

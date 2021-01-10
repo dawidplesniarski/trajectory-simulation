@@ -104,7 +104,12 @@ const SimulationsTable = ({data}) => {
                             <StyledLinkWrapper>
                                 <StyledLink
                                     onClick={() => console.log('link works')}
-                                    to={'/simulation'}>
+                                    to={{
+                                        pathname: '/simulation',
+                                        nameProps: {
+                                            name: values.simulationName
+                                        }
+                                    }}>
                                     simulate
                                 </StyledLink>
                             </StyledLinkWrapper>
