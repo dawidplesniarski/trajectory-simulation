@@ -5,6 +5,7 @@ import SimulationDayCell from "../components/tables/SimulationTable/SimulationDa
 import {generateLabels, getDeathsNumber, getRecoveredNumber, simulation} from "../utils/helpers";
 import Footer from "../components/molecules/Footer";
 import { Line } from "react-chartjs-2";
+import BackButton from "../components/atoms/BackButton/BackButton";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -68,17 +69,18 @@ const data = {
     ]
 };
 
-const SimulationPage = (props) => {
+const SimulationPage = ({location, history}) => {
     const [simulationTitle, setSimulationTitle] = useState('Simulation');
 
     useEffect(() => {
-        if(props.location.nameProps) {
-            setSimulationTitle(props.location.nameProps.name);
+        if(location.nameProps) {
+            setSimulationTitle(location.nameProps.name);
         }
     },[])
 
     return (
         <>
+            <BackButton onClick={() => history.push('/')}/>
             <StyledContainer>
                 <StyledPageTitle>{simulationTitle}</StyledPageTitle>
                 <StyledPageSubtitle>Summary</StyledPageSubtitle>
