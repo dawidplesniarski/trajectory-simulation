@@ -163,3 +163,27 @@ export const simulation = [
         "curedPeoples": 81
     }
 ]
+
+export function  getDeathsNumber(data) {
+    let finalArr = [];
+    data.forEach(item => {
+        finalArr.push(item.deadPeoples);
+    });
+    return finalArr;
+};
+
+export function  getRecoveredNumber(data) {
+    let finalArr = [];
+    data.forEach(item => {
+        finalArr.push(item.curedPeoples);
+    });
+    return finalArr;
+};
+
+export function generateLabels(data) {
+    let finalArr = [];
+    for(let i = 1; i <= data.length; i++) {
+        finalArr.push(`Day ${i}`);
+    };
+    return finalArr;
+}
