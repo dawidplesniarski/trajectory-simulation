@@ -20,7 +20,7 @@ const StyledContainer = styled.div`
 const TableWrapper = styled.div`
   display: flex;
   width: 80%
-`
+`;
 
 const ChooseSimulation = () => {
     const [formOpen, setFormOpen] = useState(false);

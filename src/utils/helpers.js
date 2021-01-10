@@ -81,7 +81,7 @@ export const simulationsData = [
 ];
 
 
-const simulation = [
+export const simulation = [
     {
         "id": 393,
         "simulationName": "Symulacja 7",
