@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import {withRouter} from "react-router";
 import SimulationDayCell from "../components/tables/SimulationTable/SimulationDayCell";
 import {simulation} from "../utils/helpers";
+import Footer from "../components/molecules/Footer";
 
 const StyledContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-bottom: 50px;
+  margin-bottom: 100px;
   margin-top: 100px;
 `;
 
@@ -26,6 +27,7 @@ const SimulationPage = () => {
                 <StyledListContainer>
                     {simulation.map((item, index) => {
                         return <SimulationDayCell
+                            day={index + 1}
                             infected={item.infectedPeoples}
                             recovered={item.curedPeoples}
                             healthy={item.healthyPeoples}
@@ -33,6 +35,7 @@ const SimulationPage = () => {
                     })}
                 </StyledListContainer>
             </StyledContainer>
+            <Footer/>
         </>
     );
 };

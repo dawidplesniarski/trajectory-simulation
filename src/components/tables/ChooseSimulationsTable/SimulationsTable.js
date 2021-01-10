@@ -86,7 +86,7 @@ const SimulationsTable = ({data}) => {
                         accessor: 'mortalityRate'
                     },
                     {
-                      Header: 'Cure time',
+                      Header: 'Recovery time',
                       accessor: 'cureTime'
                     },
                     {
@@ -104,7 +104,7 @@ const SimulationsTable = ({data}) => {
                             <StyledLinkWrapper>
                                 <StyledLink
                                     onClick={() => console.log('link works')}
-                                    to={'#'}>
+                                    to={'/simulation'}>
                                     simulate
                                 </StyledLink>
                             </StyledLinkWrapper>

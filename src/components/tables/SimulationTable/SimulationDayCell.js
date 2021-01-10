@@ -8,20 +8,25 @@ import DeathIcon from '../../../assets/images/grave.png';
 const StyledCellContainer = styled.div`
   display: flex;
   width: 100%;
-  height: 300px;
+  height: 250px;
   border-radius: 20px;
   flex-direction: row;
   justify-content: space-around;
-  background-color: #dadada;
-  margin-top: 100px;
+  background-color: #f1f1f1;
+  margin-top: 50px;
+  border: 0.5px solid #dadada;
 `;
 
 const DescriptionCell = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   height: 80%;
+  margin-top: 20px;
+  font-family: Montserrat,serif;
+  font-size: 1.5rem;
+  font-weight: normal;
 `;
 
 const StyledIcon = styled.img`
@@ -29,23 +34,38 @@ const StyledIcon = styled.img`
   height: 100px;
 `;
 
-const SimulationDayCell = ({infected, healthy, death, recovered}) => {
+const StyledTitle = styled.p`
+  display: flex;
+  align-self: center;
+  font-family: Montserrat,serif;
+  font-size: 1.4rem;
+  font-weight: bold;
+`;
+
+const SimulationDayCell = ({infected, healthy, death, recovered, day}) => {
     return (
         <>
             <StyledCellContainer>
+                <StyledTitle>
+                    Day {day}
+                </StyledTitle>
                 <DescriptionCell>
+                    <span>Healthy</span>
                     <StyledIcon src={HealthIcon} alt={'Healthy peoples'}/>
                     <span>{healthy}</span>
                 </DescriptionCell>
                 <DescriptionCell>
+                    <span>Recovered</span>
                     <StyledIcon src={RecoveredIcon} alt={'Recovered peoples'}/>
                     <span>{recovered}</span>
                 </DescriptionCell>
                 <DescriptionCell>
+                    <span>Infected</span>
                     <StyledIcon src={VirusIcon} alt={'Infected peoples'}/>
                     <span>{infected}</span>
                 </DescriptionCell>
                 <DescriptionCell>
+                    <span>Deaths</span>
                     <StyledIcon src={DeathIcon} alt={'Death peoples'}/>
                     <span>{death}</span>
                 </DescriptionCell>
