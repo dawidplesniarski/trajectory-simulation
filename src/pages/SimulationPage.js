@@ -33,14 +33,15 @@ const data = {
             label: "Deaths",
             data: getDeathsNumber(simulation),
             fill: true,
-            backgroundColor: "rgba(75,192,192,0.2)",
-            borderColor: "rgba(75,192,192,1)"
+            backgroundColor: "#ffe4e4",
+            borderColor: "rgb(252,65,94)"
         },
         {
             label: "Recovered",
             data: getRecoveredNumber(simulation),
-            fill: false,
-            borderColor: "#742774"
+            fill: true,
+            borderColor: "#62C370",
+            backgroundColor: "#dcfde3",
         }
     ]
 };
@@ -48,9 +49,6 @@ const data = {
 const SimulationPage = () => {
     return (
         <>
-            <span>Deaths: {getDeathsNumber(simulation).length} </span>
-            <span>Recovered: {getRecoveredNumber(simulation).length}</span>
-            <span></span>
             <StyledContainer>
                 <StyledChartContainer>
                     <Line data={data}/>
