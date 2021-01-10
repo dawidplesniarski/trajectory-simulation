@@ -2,10 +2,11 @@ import React, {useState, useEffect} from "react";
 import styled from 'styled-components';
 import {withRouter} from "react-router";
 import SimulationDayCell from "../components/tables/SimulationTable/SimulationDayCell";
-import {generateLabels, getDeathsNumber, getRecoveredNumber, simulation} from "../utils/helpers";
+import {API_URL, generateLabels, getDeathsNumber, getRecoveredNumber, simulation} from "../utils/helpers";
 import Footer from "../components/molecules/Footer";
 import { Line } from "react-chartjs-2";
 import BackButton from "../components/atoms/BackButton/BackButton";
+import axios from "axios";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -70,13 +71,27 @@ const data = {
 };
 
 const SimulationPage = ({location, history}) => {
-    const [simulationTitle, setSimulationTitle] = useState('Simulation');
+    const [simulationTitle, setSimulationTitle] = useState('');
+    const [simulationData, setSimulationData] = useState(simulation);
+
+    const getSimulationData = () => {
+        axios.get(`${API_URL}/days/generateSimulation/${simulationTitle}`)
+            .then(res => {
+                setSimulationData(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
 
     useEffect(() => {
         if(location.nameProps) {
             setSimulationTitle(location.nameProps.name);
         }
-    },[])
+        if(simulationTitle !== '') {
+            getSimulationData();
+        }
+    },[simulationTitle])
 
     return (
         <>
@@ -85,16 +100,16 @@ const SimulationPage = ({location, history}) => {
                 <StyledPageTitle>{simulationTitle}</StyledPageTitle>
                 <StyledPageSubtitle>Summary</StyledPageSubtitle>
                 <SummaryContainer>
-                    <span>Healthy: {simulation[simulation.length - 1].healthyPeoples}</span>
-                    <span>Infected: {simulation[simulation.length - 1].infectedPeoples}</span>
-                    <span>Deaths: {simulation[simulation.length - 1].deadPeoples}</span>
-                    <span>Recovered: {simulation[simulation.length - 1].curedPeoples}</span>
+                    <span>Healthy: {simulationData[simulation.length - 1].healthyPeoples}</span>
+                    <span>Infected: {simulationData[simulation.length - 1].infectedPeoples}</span>
+                    <span>Deaths: {simulationData[simulation.length - 1].deadPeoples}</span>
+                    <span>Recovered: {simulationData[simulation.length - 1].curedPeoples}</span>
                 </SummaryContainer>
                 <StyledChartContainer>
                     <Line data={data}/>
                 </StyledChartContainer>
                 <StyledListContainer>
-                    {simulation.map((item, index) => {
+                    {simulationData.map((item, index) => {
                         return <SimulationDayCell
                             day={index + 1}
                             infected={item.infectedPeoples}

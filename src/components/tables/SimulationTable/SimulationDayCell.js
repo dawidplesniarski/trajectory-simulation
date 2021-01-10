@@ -12,7 +12,7 @@ const StyledCellContainer = styled.div`
   border-radius: 20px;
   flex-direction: row;
   justify-content: space-around;
-  background-color: #f1f1f1;
+  background-color: #fbfbfb;
   margin-top: 50px;
   border: 0.5px solid #dadada;
 `;
