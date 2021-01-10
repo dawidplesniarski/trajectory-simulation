@@ -2,6 +2,8 @@ import React from "react";
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import {useTable} from 'react-table';
+import DeleteButton from "../../atoms/DeleteButton";
+import StartIcon from '../../../assets/images/round-play-button.png';
 
 
 const StyledLinkWrapper = styled.div`
@@ -15,12 +17,16 @@ const StyledLink = styled(Link)`
   letter-spacing: 1px;
   text-decoration: none;
   text-align: center;
-  &:hover {
-    background-color: #62C370;
-    color: #fff;
-    border-radius: 5px;
-    padding: 1px;
-    }
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const StyledButton = styled.button`
+  background-color: transparent;
+  border: none;
 `;
 
 const TableWrapper = styled.div`
@@ -99,7 +105,6 @@ const SimulationsTable = ({data}) => {
                     },
                     {
                         Header: 'Select preset',
-                        accessor: '_id',
                         Cell: ({row: {values}}) => (
                             <StyledLinkWrapper>
                                 <StyledLink
@@ -110,9 +115,22 @@ const SimulationsTable = ({data}) => {
                                             name: values.simulationName
                                         }
                                     }}>
-                                    simulate
+                                    <ButtonWrapper>
+                                        <StyledButton>
+                                            <img src={StartIcon} alt={'Start icon'}/>
+                                        </StyledButton>
+                                    </ButtonWrapper>
                                 </StyledLink>
                             </StyledLinkWrapper>
+                        )
+                    },
+                    {
+                        Header: 'Delete preset',
+                        accessor: 'id',
+                        Cell: ({row: {values}}) => (
+                            <ButtonWrapper>
+                                <DeleteButton/>
+                            </ButtonWrapper>
                         )
                     }
                 ]
