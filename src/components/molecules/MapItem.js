@@ -45,7 +45,7 @@ const MapItem = ({vectorArr, zoom, iconSize, width, height}) => {
                 })};
 
                 {vectorArr.map((item, index) => {
-                    console.log(vectorArr[index + 1]);
+                    //console.log(vectorArr[index + 1]);
                     return (
                         <>
                             {index < vectorArr.length - 1 &&

@@ -5,7 +5,6 @@ const StyledContainer = styled.div`
   flex-direction: column;
   width: 100%;
   align-items: center;
-  height: 100vh;
 `;
 
 const StyledSubContainer = styled.div`
